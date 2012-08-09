@@ -4,6 +4,8 @@
  */
 package oarlok.resources.json;
 
+import java.util.ArrayList;
+
 public class JSONClass {
     private String type; // operation:functionName, response:functionName
     
@@ -14,6 +16,8 @@ public class JSONClass {
     private Boolean success = null;
     private String message;
     private Integer resultCode = null;	
+    
+    private ArrayList<CoachRower> coachRowers;
 	
 	public boolean isSuccess() {
         return success;
@@ -70,5 +74,13 @@ public class JSONClass {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	public ArrayList<CoachRower> getCoachRowers() {
+		return coachRowers;
+	}
+
+	public void setCoachRowers(ArrayList<CoachRower> coachRowers) {
+		this.coachRowers = coachRowers;
 	}		
 }

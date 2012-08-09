@@ -61,7 +61,7 @@ private static ServletRunner servletRunner = null;
 
 	public void testLoginSuccess() throws Exception{
 		
-		 String RequestJSONString = "{ 'messageType':'authenticationRequest', 'messageVersion':1, 'messagePayload':{'username':'vaidesai@yahoo.com', 'password':'test', 'userType':'coach'}}";
+		 String RequestJSONString = "{ 'messageType':'authenticationRequest', 'messageVersion':1, 'messagePayload':{'username':'vaishnav', 'password':'test', 'userType':'coach'}}";
 		
 		 ServletUnitClient client  = CoachLoginTest.getServletUnitClient();
 		 WebRequest request   = new PostMethodWebRequest("http://localhost:8080/Oarlok/Login");
@@ -91,7 +91,7 @@ private static ServletRunner servletRunner = null;
 	
 	public void testLoginPasswordFaliure() throws Exception{
 		
-		 String RequestJSONString = "{ 'messageType':'authenticationRequest', 'messageVersion':1, 'messagePayload':{'username':'vaidesai@yahoo.com', 'password':'somepass', 'userType':'coach'}}";
+		 String RequestJSONString = "{ 'messageType':'authenticationRequest', 'messageVersion':1, 'messagePayload':{'username':'vaishnav', 'password':'somepass', 'userType':'coach'}}";
 		
 		 ServletUnitClient client  = CoachLoginTest.getServletUnitClient();
 		 WebRequest request   = new PostMethodWebRequest("http://localhost:8080/Oarlok/Login");

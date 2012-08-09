@@ -18,7 +18,7 @@ import oarlok.resources.json.JSONMessage;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class RowerLoginTest extends TestCase{
+public class CoachRowerTest extends TestCase{
 private static ServletRunner servletRunner = null;
 	
 	public static void main(String arg[]) {
@@ -26,10 +26,10 @@ private static ServletRunner servletRunner = null;
 	}
 
 	public static TestSuite suite() {
-		return new TestSuite(RowerLoginTest.class);		
+		return new TestSuite(CoachRowerTest.class);		
 	}
 
-	public RowerLoginTest(String s) {
+	public CoachRowerTest(String s) {
 		super(s);
 	}
 
@@ -59,17 +59,17 @@ private static ServletRunner servletRunner = null;
 		return null;
 	}
 
-	public void testLoginSuccess() throws Exception{
+	public void testGetCoachRowerListSuccess() throws Exception{
 		
-		 String RequestJSONString = "{ 'messageType':'authenticationRequest', 'messageVersion':1, 'messagePayload':{'username':'rower1', 'password':'test', 'userType':'rower'}}";
+		 String RequestJSONString = "{ 'messageType':'getCoachRowersRequest', 'messageVersion':1, 'messagePayload':{'username':'vaishnav', 'password':'test', 'userType':'coach'}}";
 		
-		 ServletUnitClient client  = RowerLoginTest.getServletUnitClient();
-		 WebRequest request   = new PostMethodWebRequest("http://localhost:8080/Oarlok/Login");
+		 ServletUnitClient client  = CoachRowerTest.getServletUnitClient();
+		 WebRequest request   = new PostMethodWebRequest("http://localhost:8080/Oarlok/CoachAndRowersDetails");
 		 request.setParameter("RequestType","testCode");
 		 request.setParameter("json_request_message", RequestJSONString );
 		 
 		 //Debug Info
-		 System.out.println("======================Rower Login Test======================");		 
+		 System.out.println("======================Coach Rower Test======================");		 
 		 System.out.println("Resquest JSON - "+RequestJSONString);
 		 
 		 //Get the response.
@@ -81,71 +81,42 @@ private static ServletRunner servletRunner = null;
 		 
 		 //Run Check for the valid parameters.
 		 assertEquals("content type", "application/json", response.getContentType());
-		 assertEquals("messageType", "authenticationResponse",result.getMessageType());
+		 assertEquals("messageType", "getCoachRowersResponse",result.getMessageType());
 		 assertEquals("success", true, message_payload.isSuccess());
 		 assertEquals("resultCode", 0,result.getMessagePayload().getResultCode());
 		 
 		 //Debug Info
 		 System.out.println("Oarlok Response JSON - "+ responseJSON);
-	}
+	}	
 	
-	public void testLoginPasswordFaliure() throws Exception{
+	public void testGetCoachRowerListFail_RowerLogin() throws Exception{
 		
-		 String RequestJSONString = "{ 'messageType':'authenticationRequest', 'messageVersion':1, 'messagePayload':{'username':'rower1', 'password':'somepass', 'userType':'rower'}}";
+		 String RequestJSONString = "{ 'messageType':'getCoachRowersRequest', 'messageVersion':1, 'messagePayload':{'username':'rower1', 'password':'test', 'userType':'rower'}}";
 		
-		 ServletUnitClient client  = RowerLoginTest.getServletUnitClient();
-		 WebRequest request   = new PostMethodWebRequest("http://localhost:8080/Oarlok/Login");
+		 ServletUnitClient client  = CoachRowerTest.getServletUnitClient();
+		 WebRequest request   = new PostMethodWebRequest("http://localhost:8080/Oarlok/CoachAndRowersDetails");
 		 request.setParameter("RequestType","testCode");
 		 request.setParameter("json_request_message", RequestJSONString );
 		 
-		 //Debug Info.
-		 System.out.println("======================Rower Login Test (Wrong Password)======================");
+		 //Debug Info
+		 System.out.println("======================Coach Rower Test======================");		 
 		 System.out.println("Resquest JSON - "+RequestJSONString);
-		
-		 //Get the server response.
-		 WebResponse response = client.getResponse(request);
+		 
+		 //Get the response.
+		 WebResponse response = client.getResponse(request);		 
 		 String responseJSON = response.getText();
 		 Type type = new TypeToken<JSONMessage>() {}.getType();
 		 JSONMessage result = new Gson().fromJson(responseJSON, type);
 		 JSONClass message_payload = result.getMessagePayload();
 		 
-		 //Test-Conditions..
+		 //Run Check for the valid parameters.
 		 assertEquals("content type", "application/json", response.getContentType());
-		 assertEquals("messageType", "authenticationResponse",result.getMessageType());
-		 assertEquals("resultCode", 1,result.getMessagePayload().getResultCode());
+		 assertEquals("messageType", "getCoachRowersResponse",result.getMessageType());
 		 assertEquals("success", false, message_payload.isSuccess());
+		 assertEquals("resultCode", 3,result.getMessagePayload().getResultCode());
 		 
 		 //Debug Info
-		 System.out.println("Oarlok Response JSON - "+response.getText());
-	}
+		 System.out.println("Oarlok Response JSON - "+ responseJSON);
+	}	
 	
-	public void testLoginUserNameFaliure() throws Exception{
-		
-		 String RequestJSONString = "{ 'messageType':'authenticationRequest', 'messageVersion':1, 'messagePayload':{'username':'SomeUserName', 'password':'test', 'userType':'rower'}}";
-		
-		 ServletUnitClient client  = RowerLoginTest.getServletUnitClient();
-		 WebRequest request   = new PostMethodWebRequest("http://localhost:8080/Oarlok/Login");
-		 request.setParameter("RequestType","testCode");
-		 request.setParameter("json_request_message", RequestJSONString );
-		 
-		 //Debug Info.
-		 System.out.println("======================Rower Login Test (Wrong Password)======================");
-		 System.out.println("Resquest JSON - "+RequestJSONString);
-		
-		 //Get the server response.
-		 WebResponse response = client.getResponse(request);
-		 String responseJSON = response.getText();
-		 Type type = new TypeToken<JSONMessage>() {}.getType();
-		 JSONMessage result = new Gson().fromJson(responseJSON, type);
-		 JSONClass message_payload = result.getMessagePayload();
-		 
-		 //Test-Conditions..
-		 assertEquals("content type", "application/json", response.getContentType());
-		 assertEquals("messageType", "authenticationResponse",result.getMessageType());
-		 assertEquals("success", false, message_payload.isSuccess());
-		 assertEquals("resultCode", 1,result.getMessagePayload().getResultCode());
-		 
-		 //Debug Info
-		 System.out.println("Oarlok Response JSON - "+response.getText());
-	}		
 }

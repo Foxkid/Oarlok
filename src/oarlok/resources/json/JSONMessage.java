@@ -1,18 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package oarlok.resources.json;
 
-
-/**
- *
- * @author anshu
- */
 public class JSONMessage {
-    private String messageType;     //globally unique message name
+    private String messageType;     			//globally unique message name
     private Integer messageVersion=1;           //message version, positive monotonic integer
-    private Integer messageTimeStamp;  //time in seconds since epoch
+    private Integer messageTimeStamp;  			//time in seconds since epoch
     private JSONClass messagePayload;
     
   //  private Integer messageID;

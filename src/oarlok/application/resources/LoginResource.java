@@ -95,6 +95,8 @@ import oarlok.application.errors.*;
 				SQLstatement = new SqlQueries().getLoginCoachQuery();
 			}else if(user_type.equalsIgnoreCase("rower")){
 				SQLstatement = new SqlQueries().getLoginRowerQuery();
+			}else {
+				throw new JSONDataException("The JSON Data sent is not correct.");				
 			}
 			
 			//Call the connection handler to get the connection object.
@@ -110,7 +112,10 @@ import oarlok.application.errors.*;
 				out.println(CreateResponse(true, 0));				
 			}			
 			
-		} catch (Exception e) {
+		}catch (JSONDataException e) {
+			out.println(CreateResponse(false, 2));			
+			//System.out.println(e);
+		}catch (Exception e) {
 			out.println(CreateResponse(false, 500));			
 			//System.out.println(e);
 		}				

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>Oarlok</display-name>  
+  <display-name>Oarlok</display-name>
   <filter>
     <filter-name>DispatcherFilter</filter-name>
     <filter-class>oarlok.dispatcher.DispatchFilter.DispatcherFilter</filter-class>
@@ -22,5 +22,15 @@
   <servlet-mapping>
     <servlet-name>LoginResource</servlet-name>
     <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CoachRowerResource</display-name>
+    <servlet-name>CoachRowerResource</servlet-name>
+    <servlet-class>oarlok.application.resources.CoachRowerDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoachRowerResource</servlet-name>
+    <url-pattern>/CoachAndRowersDetails</url-pattern>
   </servlet-mapping>
 </web-app>

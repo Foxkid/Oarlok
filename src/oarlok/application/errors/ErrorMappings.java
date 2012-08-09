@@ -11,6 +11,9 @@ public class ErrorMappings {
 	public ErrorMappings() {
 		errors.put(0,"Login Successful");
 		errors.put(1,"Login Unsuccessful");
+		errors.put(2,"User Type Not Provided");
+		errors.put(3,"Wrong Login Credentials. Try Again.");
+		errors.put(4,"Invalid Date Of Birth in the database. Cannot process the result. Contact Adminstrator.");
 		errors.put(500,"Server Not Responding. Please contact database administrator.");
 	}
 	
